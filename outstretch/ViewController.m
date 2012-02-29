@@ -35,7 +35,11 @@
     CGPoint fixedCenter = self.outstretchView.fixedCenter;
     fixedCenter.x += translation.x;
     fixedCenter.y += translation.y;
-    self.outstretchView.fixedCenter = fixedCenter;
+    [CATransaction begin]; {
+        [CATransaction setDisableActions:YES];
+        self.outstretchView.fixedCenter = fixedCenter;
+        [self.outstretchView layoutIfNeeded];
+    } [CATransaction commit];
 }
 
 @end
